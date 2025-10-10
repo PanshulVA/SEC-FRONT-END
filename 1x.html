@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>HTML Formatting</title>
+    <style>
+        body {
+            background-color: azure;
+            font-family: Arial, sans-serif;
+        }
+        div {
+            background-color: black;
+        }
+        .custom-font {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .wide-font {
+            font-stretch: expanded;
+        }
+        .blink {
+            color: beige;
+            font-size: 15px;
+            font-weight: bolder;
+            animation: blinker 1.25s linear infinite;
+        }
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Formatting Showcase</h1>
+    <h2 style="color:red;">Heading Level 2</h2>
+    <h3 style="color:Green;">Heading Level 3</h3>
+    
+    <p class="custom-font wide-font">This is a paragraph using a <span style="color: red;">custom font</span> and <span style="font-weight: bold;">width expansion</span>.</p>
+    
+    <p>
+        <b>Bold text example</b> <br>
+        <i>Italic text example</i> <br>
+        <u>underlined text example</u> <br>
+        <span style="color: red;">Red colored text</span> <br>
+        <span style="color: rgba(10, 155, 27, 0.745);"><b>Green colored text</b></span> <br>
+    </p>
+    
+    <p>This is a normal paragraph with<br>line breaks using &lt;br&gt; tag.<br>
+    Each line appears separately.<br>
+    Horizontal rule below:</p>
+    
+    <hr>
+    
+    <div>
+        <span class='blink'>Blinking text using CSS!</span>
+    </div>
+    <br>
+    <marquee direction="left" scrollamount="6" style="color:rgb(205, 14, 167);">
+        This is marquee text scrolling left!
+    </marquee><br><br>
+    <marquee direction="right" scrollamount="6.1" style="color:rgb(213, 179, 8);">
+        This is marquee text scrolling right!
+    </marquee>
+
+</body>
+</html>
