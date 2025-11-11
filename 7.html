@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assignment 3 - JavaScript Event Driven Programs</title>
+<style>
+  body { font-family: Arial; background: #f7f7f7; padding: 20px; }
+  .section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  input { width: 100%; padding: 8px; margin: 8px 0; }
+  button { padding: 8px 14px; margin-top: 5px; cursor: pointer; }
+  pre { background: #eee; padding: 10px; border-radius: 5px; }
+</style>
+</head>
+<body>
+<h2>Assignment 3: JavaScript Event‑Driven Programs</h2>
+
+<!-- Multiplication Table -->
+<div class="section">
+  <h3>Multiplication Table</h3>
+  <input id="num" type="number" placeholder="Enter a number" />
+  <button onclick="table()">Print Table</button>
+  <pre id="out1"></pre>
+</div>
+
+<!-- Largest of Three Numbers -->
+<div class="section">
+  <h3>Largest of Three Numbers</h3>
+  <input id="a" type="number" placeholder="First number">
+  <input id="b" type="number" placeholder="Second number">
+  <input id="c" type="number" placeholder="Third number">
+  <button onclick="largest()">Find Largest</button>
+  <p id="out2"></p>
+</div>
+
+<!-- Factorial -->
+<div class="section">
+  <h3>Factorial</h3>
+  <input id="f" type="number" placeholder="Enter a number">
+  <button onclick="fact()">Find Factorial</button>
+  <p id="out3"></p>
+</div>
+
+<!-- Sum & Average -->
+<div class="section">
+  <h3>Sum & Average (Stop with 0)</h3>
+  <button onclick="sumavg()">Start Input</button>
+  <p id="out4"></p>
+</div>
+
+<script>
+function table() {
+  let n = document.getElementById('num').value;
+  let o = "";
+  for (let i = 1; i <= 10; i++) o += `${n} x ${i} = ${n*i}\n`;
+  document.getElementById('out1').textContent = o;
+}
+
+function largest() {
+  let x = +document.getElementById('a').value,
+      y = +document.getElementById('b').value,
+      z = +document.getElementById('c').value;
+  document.getElementById('out2').textContent = "Largest = " + Math.max(x, y, z);
+}
+
+function fact() {
+  let n = +document.getElementById('f').value;
+  let r = 1;
+  for (let i = 1; i <= n; i++) r *= i;
+  document.getElementById('out3').textContent = "Factorial = " + r;
+}
+
+function sumavg() {
+  let sum = 0, count = 0, num;
+  while (true) {
+    num = Number(prompt('Enter number (0 to stop):'));
+    if (num === 0) break;
+    if (num > 0) {
+      sum += num;
+      count++;
+    }
+  }
+  document.getElementById('out4').textContent = `Sum = ${sum}, Average = ${sum / count}`;
+}
+</script>
+
+</body>
+</html>
