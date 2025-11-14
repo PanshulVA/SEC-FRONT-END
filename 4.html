@@ -1,462 +1,168 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ramanujan College</title>
-  <style>
-    :root{
-      --brand:#f65a29;
-      --muted:#6b7280;
-      --nav-bg:#f0f4f9;
-      --card:#ffffff;
-      --lil:#e6eefc;
-    }
-    html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;color:#111}
-    /* --- Top bar (acts like the top frame) --- */
-    header{
-      position:fixed;
-      top:0;left:0;right:0;
-      height:90px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-      padding:12px 20px;
-      background:linear-gradient(180deg,var(--brand),#f65a29);
-      color:white;
-      z-index:30;
-      box-shadow:0 4px 12px rgba(0,0,0,0.08);
-    }
-    header .brand {
-      display:flex;
-      gap:12px;
-      align-items:center;
-      width:100%;
-      max-width:1100px;
-    }
-    header img { height:70px; width:auto; flex:0 0 auto; }
-    header h1{font-size:1.25rem;margin:0}
-    header .subtitle{ font-size:0.85rem; color:rgba(255,255,255,0.9) }
+    <title>Ramanujan College</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { margin:0; font-family:Arial; }
 
-    /* --- Main area (below top bar) --- */
-    main{
-      display:grid;
-      grid-template-columns: 260px 1fr;
-      gap:0;
-      height: calc(100vh - 90px);
-      margin-top:90px; /* leave space for fixed header */
-    }
-
-    /* Left nav (acts like left frame) */
-    nav{
-      background:var(--nav-bg);
-      border-right:1px solid #e1e8f2;
-      padding:18px;
-      overflow:auto;
-    }
-    .nav-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px }
-    .nav-list a{
-      display:block;
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:8px;
-      font-weight:600;
-      color:var(--brand);
-      background:var(--card);
-      border:1px solid #d6e0ef;
-    }
-    .nav-list a:focus,
-    .nav-list a:hover,
-    .nav-list a.active{
-      background:var(--brand); color:white; border-color:transparent;
-      outline: none;
-    }
-
-    /* Right content (iframe) */
-    .content {
-      background: #fff;
-      position:relative;
-      overflow:hidden;
-    }
-    iframe#contentFrame {
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-      background:var(--card);
-    }
-
-    /* Responsive: stack nav on top for narrow screens */
-    @media (max-width:820px){
-      main{ grid-template-columns: 1fr; grid-template-rows: auto 1fr; height: calc(100vh - 90px); }
-      nav{ border-right:0; border-bottom:1px solid #e1e8f2; max-height:36vh; }
-    }
-
-    /* Small utility */
-    .small{ font-size:0.86rem; color:var(--muted) }
-  </style>
-</head>
-<body>
-  <header role="banner" aria-label="Top banner">
-    <div class="brand" role="presentation">
-      <img src="https://ramanujancollege.ac.in/media/images/Logo_RCDU_8oecNot.original.png">
-        <defs>
-          <linearGradient id="g" x1="0" x2="1">
-            <stop offset="0" stop-color="#ffd54a"/>
-            <stop offset="1" stop-color="#ff8a65"/>
-          </linearGradient>
-        </defs>
-        <rect rx="14" width="100" height="100" fill="url(#g)"/>
-        <text x="50" y="60" font-family="Georgia, serif" font-size="50" text-anchor="middle" fill="#fff" font-weight="700"></text>
-
-      <div>
-        <h1>Ramanujan College, University of Delhi</h1>
-        <div class="subtitle small">Student / Faculty Portal</div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <nav aria-label="Navigation">
-      <ul class="nav-list" role="menu">
-        <li role="none"><a href="#faculty" data-page="faculty" role="menuitem" tabindex="0">Faculty</a></li>
-        <li role="none"><a href="#courses" data-page="courses" role="menuitem" tabindex="0">Courses</a></li>
-        <li role="none"><a href="#activities" data-page="activities" role="menuitem" tabindex="0">Student Activities</a></li>
-        <li role="none"><a href="#contact" data-page="contact" role="menuitem" tabindex="0">Contact</a></li>
-      </ul>
-    </nav>
-
-    <section class="content" aria-label="Content frame">
-      <!-- Right frame: dynamic content displayed here -->
-      <iframe id="contentFrame" title="Content area"></iframe>
-    </section>
-  </main>
-
-  <script>
-    /* ========= In-memory pages (renders inside the right 'frame') ========= */
-    const PAGES = {
-      faculty: `
-        <!doctype html><html><head>
-        <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Faculty</title>
-        <style>body{font-family:Arial,Helvetica,sans-serif;padding:22px;color:#111}h2{color: #004080}ul{line-height:1.6}</style>
-        </head><body>
-        <h1>Faculty</h1>
-        <h2>Teachers</h2>
-        <ol>
-          <li>Smt. Rachna Gupta</li>
-          <li>Prof. Meena Sharma</li>
-          <li>Prof. K. Latha</li>
-          <li>Prof. Umesh Jha</li>
-          <li>Prof. Hemlata</li>
-          <li>Prof. Minakshi Lahkar</li>
-          <li>Dr. Sudhanshu Mohan Kestwal</li>
-          <li>Prof. Ajay Kumar</li>
-          <li>Prof. Madhu Kaushik</li>
-          <li>Prof. Nawab Singh</li>
-          <li>Ms. Ravneet Kaur</li>
-          <li>Prof. Prabuddh Ananda</li>
-          <li>Prof. Kanwaljeet Singh</li>
-          <li>Ms. Suchi Patti</li>
-          <li>Sh. H. Lamminlun Neihsial</li>
-          <li>Dr. Nagender Pal Singh</li>
-          <li>Dr. Mohinder Paul</li>
-          <li>Dr. V Gunasekaran</li>
-          <li>Mr. Pappu</li>
-          <li>Dr. Shalini Sharma</li>
-          <li>Dr. Dharmendra Nath Tiwari</li>
-          <li>Dr. Sachin Tomer</li>
-          <li>Dr. Ashish Kr. Shukla</li>
-          <li>Dr. Anupam Kumar</li>
-          <li>Dr. Alok Ranjan Pandey</li>
-          <li>Mr. Sahil Pathak</li>
-          <li>Ms. Bhavya Ahuja</li>
-          <li>Dr. Kamlesh Kr. Raghuvanshi</li>
-          <li>Dr. Zairunisha</li>
-          <li>Dr. Anumita Shukla</li>
-          <li>Dr. Vivek Kumar</li>
-          <li>Mr. Bullo Kano</li>
-          <li>Dr. Archana Jamatia</li>
-          <li>Dr. Neetanjali Khari</li>
-          <li>Dr. Mahima Singh</li>
-          <li>Dr. Shruti Jain</li>
-          <li>Dr. Megha Sharma</li>
-          <li>Ms. Arzoo Saha</li>
-          <li>Dr. Virendra Kumar</li>
-          <li>Dr. Rajesh Singh</li>
-          <li>Dr. Deepakshi Sharma</li>
-          <li>Mr. Deepak Kumar</li>
-          <li>Mr. Rahul Singh</li>
-          <li>Dr. Nikhil Kumar Rajput</li>
-          <li>Ms. Sheetal</li>
-          <li>Dr. Subodh Kumar</li>
-          <li>Mr. Vipin Kumar Rathi</li>
-          <li>Dr. Arun Agarwal</li>
-          <li>Dr. Shailendra Pathak</li>
-          <li>Dr. Neha Singh</li>
-          <li>Dr. Preeti</li>
-          <li>Ms. Shipra Yadav</li>
-          <li>Dr. Swati Saini</li>
-          <li>Dr. Anjali Prashad</li>
-          <li>Ms. Isha Gangwani</li>
-          <li>Ms. Vandana Rathore</li>
-          <li>Mr. Sonu Kumar</li>
-          <li>Ms. Pallavi Meena</li>
-          <li>Ms. Isha Gupta</li>
-          <li>Ms. Deeksha Dhanerwal</li>
-          <li>Dr. Vishakha Sharma</li>
-          <li>Dr. Akanksha Mishra</li>
-          <li>Dr. Tenzin Thakur</li>
-          <li>Dr. Sandeep Thakur</li>
-          <li>Ms. Neha Yadav</li>
-          <li>Mr. Gaurav</li>
-          <li>Dr. Moirangthem Jiban Singh</li>
-          <li>Ms. Jyoti Kushawaha</li>
-          <li>Dr. Devendra Kumar</li>
-          <li>Dr. Rajiv Nayan</li>
-          <li>Ms. Parul Yadav</li>
-          <li>Ms. Ruchika Bal</li>
-          <li>Dr. Abhay Pandey</li>
-          <li>Mr. Pankaj Gusain</li>
-          <li>Ms. Charu Jain</li>
-          <li>Dr. Arti Yadav</li>
-          <li>Mr. Sumit Kumar</li>
-          <li>Dr. Sunita Pooniya</li>
-          <li>Mr. Prakhar Wadhwa</li>
-          <li>Ms. Vineeta Chaudhary</li>
-          <li>Ms. Ramya Jain</li>
-          <li>Dr. Anjali Gupta</li>
-          <li>Mr. Pankaj Gupta</li>
-          <li>Ms. Inakshi</li>
-          <li>Ms. Pranita Srivastava</li>
-          <li>Dr. Madhu Monga</li>
-          <li>Dr. Pallavi Mahajan</li>
-          <li>Dr. Birjesh Kumar</li>
-          <li>Dr. Parul Saini</li>
-          <li>Dr. Komal</li>
-          <li>Mr. Killa Anil Kumar</li>
-          <li>Dr. Renu Gg</li>
-          <li>Dr. Abhishek</li>
-          <li>Ms. Saroj Kumari</li>
-          <li> Dr. Mamta Tyagi</li>
-          <li>Dr. Vikas Kumar</li>
-          <li>Dr. Aakash</li>
-          <li>Dr. Shikha Singh</li>
-          <li>Ms. Rose Christina Topno</li>
-          <li>Dr. Surbhi</li>
-          <li>Ms. Nirupuma Yadav</li>
-          <li>Mr. Kumar Ujwal</li>
-          <li>Ms. Omisha Sangeet</li>
-          <li>Dr. Pratima Singh</li>
-          <li>Dr. Sunil Kumar Mishra</li>
-          <li>Dr. Aastha Jain</li>
-          <li>Mr. Chandan Kumar Sharma</li>
-          <li>Ms. Neha</li>
-          <li>Dr. Preeti Bansal</li>
-          <li>Dr. Rahul Solanki</li>
-          <li>Mr. Akhil Raj</li>
-          <li>Ms. Preksha Mishra</li>
-          <li>Mr. Ashish Yadav</li>
-          <li>Dr. Rachita Garg</li>
-          <li>Dr. Sunil</li>
-          <li>Dr. Dinkar Singh</li>
-          <li>Dr. Manoj Dahiya</li>
-          <li>Dr. Hiranya Himkar</li>
-          <li>Dr. Mamata Chaurasia</li>
-        <h2>Staff</h2>
-        <h3>Principals Office</h3>
-        <ul>
-          <li>Mr. Sanjay Bhandari, Sr. Personal Assistant</li>
-          <li>Ms. Nidhi Mathur, Sr. Assistant</li>
-          <li>Mr. Amol Ranjan Pandey, Laboratory Assistant</li>
-          <li>Mr. Jitender Sharma, MTS (Contractual)</li>
-        </ul><br>
-        <h3>Administration Department</h3>
-        <ul>
-          <li>Mr. Rajesh Yadav, Administrative Officer</li>
-          <li>Mr. Mukesh B. Maindola, Section Officer</li>
-          <li>Mr. Agnesh Surya, Senior Assistant</li>
-          <li>Mr. Akash Sagar, Assistant</li>
-          <li>Mr. Aklesh Nautiyal, Assistant</li>
-          <li>Mr. Rohit Gupta, Assistant</li>
-          <li>Mr. Anil Yadav, Junior Assistant</li>
-          <li>Mr. Karnail Singh, Junior Assistant</li>
-          <li>Mr. Dinesh Kumar, Junior Assistant</li>
-          <li>Mr. Anuranjan Toppo, Junior Assistant</li>
-          <li>Mr. Punit Bajpayee, Junior Assistant</li>
-          <li>Mr. Arvind Kumar, Junior Assistant</li>
-          <li>Mr. Nomaan Baig, Junior Assistant (Contractual)</li>
-          <li>Mr. Mahavir, MTS</li>
-          <li>Mr. Ashok Kumar, MTS</li>
-          <li>Mr. Hemant Giri, MTS</li>
-          <li>Mr. Santosh Kumar, MTS (Contractual)</li>
-          <li>Mr. Sitlesh Chauhan, Electrician (Contractual)</li>
-        </ul><br>
-        <h3>Accounts Department</h3>
-        <ul>
-          <li>Mr. Shivam Tripathi, Administrative Officer</li>
-          <li>Mr. Mohit Jagota, Section Officer</li>
-          <li>Mr. Sumit Suhag, Senior Assistant</li>
-          <li>Mr. Ram Prasad, Assistant</li>
-          <li>Ms. Aarti Bhardwaj, Junior Assistant</li>
-          <li>Ms. Priyanka Bisht, Library Attendant</li>
-          <li>Mr. Leela Dhar, MTS Office</li>
-        </ul>
-        <h3>Library Department</h3>
-        <ul>
-          <li>Mr. Jatan Singh, Professional Assistant</li>
-          <li>Ms. Vinita Thakur, Semi Professional Assistant</li>
-          <li>Mr. Krishan Kumar, Semi Professional Assistant</li>
-          <li>Mr. Veer Pal Singh, Library Assistant</li>
-          <li>Mr. Bhagwat Garg, Library Assistant</li>
-          <li>Mr. Mohit Verma, Library Attendant</li>
-          <li>Mr. Sanjeev Kumar, Library Assistant</li>
-          <li>Mr. Sachin Kumar, Library Attendant</li>
-          <li>Mr. Amit Kumar, Library Attendant</li>
-          <li>Mr. Sant Ram, Library Attendant</li>
-          <li>Mr. Ashok Maurya, Library Attendant</li>
-          <li>Mr. Pankaj Pal, Library Attendant</li>
-          <li>Mr. Anil Kumar, Library Attendant</li>
-          <li>Ms. Anu Kumari Sharma, Library Attendant</li>
-          <li>Mr. Sarjit Singh, MTS Office</li>
-          <li>Mr. Kapil Salaria, Library Attendant</li>
-        </ul>
-        <h3>MMTTC and Media Lab Staff</h3>
-        <ul>
-          <li>Mr. Vinod, MTS (Contractual)</li>
-          <li>Mr. Sanchit, Research Assistant (Contractual, MMTTC)</li>
-          <li>Mr. Prem Shankar Singh, Computer Assistant (Contractual, MMTTC)</li>
-          <li>Mr. Manish Kumar, Support Staff (Contractual, MMTTC)</li>
-        </ul>
-        <h3>Maintenance & Medical</h3>
-        <ul>
-          <li>Mr. Sandeep Kumar, Library Attendant (Maintenance)</li>
-          <li>Ms. Shyamala, Nurse (Medical)</li>
-        </body></html>
-
-      `,
-      courses: `
-        <!doctype html><html><head>
-        <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Courses</title>
-        <style>body{font-family:Arial,Helvetica,sans-serif;padding:22px}h2{color:#004080}</style>
-        </head><body>
-        <h2>Courses Offered</h2>
-        <h3>Honours Courses</h3>
-        <ul>
-          <li>B.Sc. (Hons.) Computer Science</li>
-          <li>B.Sc. (H) Statistics</li>
-          <li>B.Sc. (H) Mathematics</li>
-          <li>B.Sc. (H) Environmental Sciences</li>
-          <li>B.A. (H) Economics</li>
-          <li>B.A. (H) English</li>
-          <li>B.A. (H) Hindi</li>
-          <li>B.A. (H) Philosophy</li>
-          <li>B.A. (H) Political Science</li>
-          <li>B.A. (H) Applied Psychology</li>
-          <li>B.A. Programme</li>
-          <li>B.Com (H)</li>
-          <li>B.Com</li>
-          <li>B.Voc. Banking, Financial Services and Insurance</li>
-          <li>B.Voc. Software Development</li>
-          <li>B.M.S. Bachelors of Management Studies</li>
-        </ul>
-        <h3>B.A. Program Courses</h3>
-        <ul>
-          <li>B.A. Economics + Entrepreneurship and Small Business (ESB) </li>
-          <li>B.A. Economics + Accounting and Finance </li>
-          <li>B.A. Accounting and Finance + Mathematics </li>
-          <li>B.A. Economics + Psychology </li>
-          <li>B.A. Entrepreneurship and Small Business (ESB) + Mathematics </li>
-          <li>B.A. History + Philosophy </li>
-          <li>B.A. History + Political Science </li>
-          <li>B.A. Philosophy + Political Science </li>
-          <li>B.A. Political Science + Psychology </li>
-          <li>B.A. Hindi + Political Science </li>
-          <li>B.A. Hindi + History </li>
-        </body></html>
-      `,
-      activities: `
-        <!doctype html><html><head>
-        <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Activities</title>
-        <style>body{font-family:Arial,Helvetica,sans-serif;padding:22px}h2{color:#004080}</style>
-        </head><body>
-        <h2>Student Activities</h2>
-        <ul>
-          <li>TechSoc — Coding Competitions & Workshops</li>
-          <li>FinClub — Financial Literacy Sessions</li>
-          <li>Cultural Fest — Abhivyakti</li>
-          <li>Sports Meet — Annual Athletics & Games</li>
-        </ul>
-        </body></html>
-      `,
-      contact: `
-        <!doctype html><html><head>
-        <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Contact</title>
-        <style>body{font-family:Arial;padding:18px}h2{color:#004080}</style>
-        </head><body>
-        <h2>Contact</h2>
-        <p class="small">Office: Ramanujan College<br>Email: info@ramanujancollege.example (sample)</p>
-        </body></html>
-      `
-    };
-
-    /* ========= iframe content setter with fallback for older browsers ========= */
-    function setIframeContent(html){
-      const frame = document.getElementById('contentFrame');
-      try {
-        if ('srcdoc' in frame) {
-          frame.srcdoc = html;
-        } else {
-          // fallback (older browsers)
-          frame.contentWindow.document.open();
-          frame.contentWindow.document.write(html);
-          frame.contentWindow.document.close();
+        /* Top header */
+        .header {
+            height: 90px;
+            background: #f65a29;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            gap: 15px;
         }
-      } catch (err) {
-        // As a last resort, navigate the frame to a data URL (works but may be blocked in some contexts)
-        const data = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-        frame.src = data;
-      }
-    }
 
-    /* ========= navigation handling ========= */
-    function setActiveLink(name){
-      document.querySelectorAll('a[data-page]').forEach(a=>{
-        a.classList.toggle('active', a.dataset.page === name);
-      });
-    }
+        .header img {
+            height: 60px;
+        }
 
-    function loadPage(name){
-      if(!name || !PAGES[name]){ name = 'faculty'; }
-      setIframeContent(PAGES[name]);
-      setActiveLink(name);
-      // set location.hash for bookmarking/back-button behavior
-      if(location.hash.substring(1) !== name) location.hash = name;
-    }
+        /* Layout: left + right */
+        .layout {
+            display: flex;
+            height: calc(100vh - 90px);
+        }
 
-    // Attach click handlers (use delegation)
-    document.addEventListener('click', function(e){
-      const a = e.target.closest && e.target.closest('a[data-page]');
-      if(a){
-        e.preventDefault();
-        const page = a.dataset.page;
-        loadPage(page);
-      }
-    });
+        /* Left menu */
+        .menu {
+            width: 240px;
+            background: #e6f2ff;
+            padding: 15px;
+            overflow-y: auto;
+        }
 
-    // Respond to hash changes (back/forward / direct link)
-    window.addEventListener('hashchange', ()=> {
-      const dest = location.hash ? location.hash.substring(1) : 'faculty';
-      loadPage(dest);
-    });
+        .menu a {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #f65a29;
+            border: 1px solid #ddd;
+        }
 
-    // Load initial page (from hash or default)
-    (function init(){
-      const start = location.hash ? location.hash.substring(1) : 'faculty';
-      loadPage(start);
-    })();
-  </script>
+        .menu a:hover { background:#f65a29; color:white; }
+
+        /* Right content */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- TOP HEADER -->
+<div class="header">
+    <img src="https://ramanujancollege.ac.in/media/images/Logo_RCDU_8oecNot.original.png">
+    <h2>Ramanujan College — Student / Faculty Portal</h2>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+    <!-- LEFT MENU -->
+    <div class="menu">
+        <a href="#" onclick="loadPage('faculty')">Faculty</a>
+        <a href="#" onclick="loadPage('courses')">Courses</a>
+        <a href="#" onclick="loadPage('activities')">Student Activities</a>
+        <a href="#" onclick="loadPage('contact')">Contact</a>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <iframe id="contentFrame"
+        srcdoc="<h2 style='padding:20px;'>Welcome to Ramanujan College Portal<br>Select a section from the left.</h2>">
+    </iframe>
+
+</div>
+
+<script>
+/* ------------------ In-memory pages ------------------ */
+const PAGES = {
+
+faculty: `
+<!DOCTYPE html><html><body style='font-family:Arial;padding:20px;'>
+<h1>Faculty</h1>
+<h2>Teachers</h2>
+<ol style="line-height:1.6;">
+<li>Dr. Aakash</li>
+<li>Dr. Kamlesh Raghuvanshi</li>
+<li>Mr. Vipin Rathi</li>
+<li>Mr. Nikhil Kumar</li>
+<li>Mr. Sahil Pathak</li>
+<li>Ms. Vandana Rathore</li>
+<li>Ms. Isha Gangwani</li>
+<li>Mr. Ashish Yadav</li>
+<li>Ms. Sonia Sodhi</li>
+<li>Mr. Sudhanshu Kestwal</li>
+</ol>
+
+<h2>Staff</h2>
+<ul>
+<li>Mr. Sanjay Bhandari – Senior PA</li>
+<li>Ms. Nidhi Mathur – Senior Assistant</li>
+<li>Mr. Jitender Sharma – MTS</li>
+</ul>
+
+</body></html>
+`,
+
+courses: `
+<!DOCTYPE html><html><body style='font-family:Arial;padding:20px;'>
+<h2>Courses Offered</h2>
+<h3>Honours</h3>
+<ul>
+<li>B.Sc. (Hons.) Computer Science</li>
+<li>B.Sc. (H) Statistics</li>
+<li>B.Sc. (H) Mathematics</li>
+<li>B.Sc. (H) Environmental Sciences</li>
+<li>B.A. (H) Economics</li>
+<li>B.A. (H) English</li>
+<li>B.A. (H) Hindi</li>
+<li>B.A. (H) Philosophy</li>
+<li>B.A. (H) Political Science</li>
+<li>B.A. (H) Applied Psychology</li>
+<li>B.Com (H)</li>
+<li>B.Voc. Software Development</li>
+</ul>
+</body></html>
+`,
+
+activities: `
+<!DOCTYPE html><html><body style='font-family:Arial;padding:20px;'>
+<h2>Student Activities</h2>
+<ul>
+<li>TechSoc — Coding Competitions & Workshops</li>
+<li>FinClub — Financial Literacy Sessions</li>
+<li>Cultural Fest — Abhivyakti</li>
+<li>Sports Meet — Annual Athletics & Games</li>
+</ul>
+</body></html>
+`,
+
+contact: `
+<!DOCTYPE html><html><body style='font-family:Arial;padding:20px;'>
+<h2>Contact</h2>
+<p>Email: info@ramanujancollege.example</p>
+<p>Office: Ramanujan College</p>
+</body></html>
+`
+};
+
+/* ------------------ Loader ------------------ */
+function loadPage(name) {
+    document.getElementById("contentFrame").srcdoc = PAGES[name];
+}
+</script>
+
 </body>
 </html>
