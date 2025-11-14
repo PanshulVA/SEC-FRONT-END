@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Assignment 2 - Department Webpage</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practicle 6</title>
 <style>
   :root{
     --bg:#f2f4f7; --nav:#173a5e; --accent:#2a9df4; --card:#ffffff;
@@ -15,7 +12,6 @@
   .topbar{
     background:var(--nav); color:#fff; padding:10px 16px; display:flex; align-items:center; justify-content:space-between;
   }
-  .brand{font-weight:700; letter-spacing:0.4px}
 
   /* Nav menu */
   nav{display:flex; gap:8px; align-items:center}
@@ -30,15 +26,6 @@
   .dropdown-menu a:hover{background:var(--bg)}
   .dropdown:focus-within .dropdown-menu,.dropdown:hover .dropdown-menu{display:block}
 
-  /* Responsive burger */
-  .burger{display:none;background:none;border:0;color:#fff;font-size:20px}
-  @media (max-width:720px){
-    nav{display:none; position:absolute; left:0; right:0; top:56px; background:var(--nav); flex-direction:column; gap:0}
-    nav a, .dropbtn{width:100%; text-align:left; padding:14px 16px}
-    .burger{display:block}
-    .topbar{position:relative}
-  }
-
   /* Page content */
   .container{max-width:1100px;margin:28px auto;padding:0 16px}
   .hero{background:linear-gradient(90deg,rgba(42,157,244,0.08),transparent); padding:22px;border-radius:10px}
@@ -52,7 +39,6 @@
 
 <header class="topbar">
   <div class="brand">Computer Science Department</div>
-  <button class="burger" aria-label="menu" onclick="toggleNav()">☰</button>
   <nav id="mainNav">
     <a class="nav-link" href="#">Home</a>
 
@@ -132,16 +118,16 @@
     <article id="faculty" class="card">
       <h3>Faculty (B.Sc. CS Hons)</h3>
       <ul>
-        <li>Highly qualified faculty members with specialization in AI, ML, Operating Systems, Networks, and Security.</li>
-        <li>Active researchers with publications, seminars, and funded research projects.</li>
-        <li>Mentorship for internships, projects, and placements.</li>
       </ul>
+      <li>Dr. Aakash (OR)</li>
+      <li>Mr. Vipin Rathi</li>
+      <li>Dr. Kamlesh Raghuvanshi</li>
     </article>
 
     <article id="labs" class="card">
       <h3>Laboratories</h3>
       <ul>
-        <li>Fully equipped Computer Labs</li>
+        <li>Fully equipped Computer Labs with 16gb ram i7 and 4gb video cards</li>
         <li>High-performance networking infrastructure</li>
         <li>Linux, Windows, Docker, and Cloud lab environments</li>
       </ul>
@@ -167,26 +153,15 @@
         <li>Full-Stack Web Developer</li>
         <li>Cloud Engineer</li>
         <li>System Administrator</li>
-        <li>Higher Studies (MCA, M.Sc CS, M.Tech, MBA, etc.)</li>
+        <li>Higher Studies (MCA, M.Sc CS, M.Tech, MBA,Ph.D, etc.)</li>
       </ul>
     </article>
   </section>
 </main>
 
 <footer>
-  © Your University — Computer Science Department
+  © Ramanujan College — Computer Science Department
 </footer>
-
-<script>
-function toggleNav(){
-  const nav=document.getElementById('mainNav');
-  if(getComputedStyle(nav).display==='none') nav.style.display='flex'; else nav.style.display='none';
-}
-// Close mobile nav when link clicked
-document.addEventListener('click', (e)=>{
-  if(e.target.matches('nav a') && window.innerWidth<=720) document.getElementById('mainNav').style.display='none';
-});
-</script>
 
 </body>
 </html>
