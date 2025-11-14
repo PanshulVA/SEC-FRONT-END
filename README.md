@@ -1,11 +1,21 @@
 # The SEC Front-End
-## First Upload 
-1x.html  
+## Final Upload 
+1.html  
 2.html  
 3.html  
 4.html  
 5.html  
-**It is the first upload i.e. the first checkpoint for my sem-1 sec as a repository**  
+6.html  
+7.html  
+8.html  
+  
+    
+      
+        
+**It is the first upload i.e. the first checkpoint for my sem-1 sec as a repository** --Oct 11
+**It is the final upload of the practicles as their complete.**  
+**Now only some minor changes shall be done**  
+
   
   
 
